@@ -2,10 +2,11 @@
 INFORMAÇÕES TÉCNICAS
 -------------------------------------------------------------------------------------------------------
 
-Versão do Java: 8
-Package : (default package)
-Classe Principal : GftDeveloperPracticum.java
-Classe de Testes : GftDeveloperPracticumTest.java
+ - Versão do Java: 8
+ - Package principal : main
+ - Package de testes : test
+ - Classe Principal : GftDeveloperPracticum.java
+ - Classe de Testes : GftDeveloperPracticumTest.java
 
 -------------------------------------------------------------------------------------------------------
 INSTRUÇÕES
