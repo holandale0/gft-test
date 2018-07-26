@@ -6,6 +6,19 @@ import java.util.HashMap;
 
 public class GftDeveloperPracticum {
 	
+	public static Boolean checkMultipleOrders(String time, String order) {
+		
+		if(time.equals("morning") && order.equals("coffe")) {
+			return true;
+		}else if(time.equals("night") && order.equals("potato")){
+			return true;
+		}else {
+			return false;
+		}
+		
+		
+	}
+		
 	public static void main(String[] args) throws IOException { 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
               
@@ -21,6 +34,9 @@ public class GftDeveloperPracticum {
         hm.put("night,2", "potato");
         hm.put("night,3", "wine");
         hm.put("night,4", "cake");
+        
+        String time = "";
+        boolean isValid = false;
         
         String enter1 = "";
         String enter2 = "";
@@ -42,7 +58,9 @@ public class GftDeveloperPracticum {
         System.out.print("Enter values:\n");   
         String s = br.readLine().trim().toLowerCase().replace(" ", "");
         
-        if(s.contains("morning")) {       	
+        if(s.contains("morning")) {
+
+        	time = "morning";
         	
     	    if(s.length() > 7 && s.charAt(7) == ',') {
     	    	enter1 = "morning,"+s.charAt(8);
@@ -61,6 +79,7 @@ public class GftDeveloperPracticum {
         	
         }else if(s.contains("night")) {
         	
+        	time = "night";
         	
         	    if(s.length() > 5 && s.charAt(5) == ',') {
         	    	enter1 = "night,"+s.charAt(6);
@@ -92,41 +111,143 @@ public class GftDeveloperPracticum {
         }if(!"".equals(enter2)) {
         	
             if(enter1.replace(",", "").equals(enter2.replace(",", ""))) {
-            	response = hm.get(enter1)+"(2x)"+",";         	  	
+            	if(checkMultipleOrders(time,enter1.replace(",", ""))) {
+            		isValid = true;
+            		response = hm.get(enter1)+"(2x)"+",";  
+            	}else {
+            		isValid = false;
+            		response = "You should order multiple coffe only on morning and multiple potato only on night";
+            	}
+            	       	  	
             }else {
-            	response = response + "," + hm.get(enter2);
+            	if(isValid) {
+            		response = response + "," + hm.get(enter2);
+            	} else {
+            		response = hm.get(enter1) + "," + hm.get(enter2);
+            	}
+            	
             }
         	
         }if(!"".equals(enter3)) {
         	
         	if(enter1.replace(",", "").equals(enter3.replace(",", "")) && enter2.replace(",", "").equals(enter3.replace(",", ""))) {
-            	response = hm.get(enter1) + "(3x)";
+            	
+            	if(checkMultipleOrders(time,enter1.replace(",", ""))) {
+            		isValid = true;
+            		response = hm.get(enter1) + "(3x)";
+            	}else {
+            		isValid = false;
+            		response = "You should order multiple coffe only on morning and multiple potato only on night";
+            	}
+            	
             }else if(enter1.replace(",", "").equals(enter3.replace(",", ""))) {
-            	response = hm.get(enter1)+"(2x)"+","+hm.get(enter2);         	  	
+            	    
+            	if(checkMultipleOrders(time,enter1.replace(",", ""))) {
+            		isValid = true;
+            		response = hm.get(enter1)+"(2x)"+","+hm.get(enter2); 
+            	}else {
+            		isValid = false;
+            		response = "You should order multiple coffe only on morning and multiple potato only on night";
+            	}
+            	
             }else if(enter2.replace(",", "").equals(enter3.replace(",", ""))){
-            	response = hm.get(enter1) + "," + hm.get(enter2) +"(2x)";
+            	                 	
+            	if(checkMultipleOrders(time,enter2.replace(",", ""))) {
+            		isValid = true;
+            		response = hm.get(enter1) + "," + hm.get(enter2) +"(2x)";
+            	}else {
+            		isValid = false;
+            		response = "You should order multiple coffe only on morning and multiple potato only on night";
+            	}
+            	
             }else {
-            	response = response + "," + hm.get(enter3);
+            	if(isValid) {
+            		response = response + "," + hm.get(enter3);
+            	}else {
+            		response = hm.get(enter1) + "," + hm.get(enter2)+ "," + hm.get(enter3);
+            	}
+            	
             }
         	
         }if(!"".equals(enter4)) {
         	
         	if(enter1.replace(",", "").equals(enter4.replace(",", "")) && enter2.replace(",", "").equals(enter4.replace(",", "")) && enter3.replace(",", "").equals(enter4.replace(",", ""))) {
-        		response = hm.get(enter1) + "(4x)";
+        		
+            	if(checkMultipleOrders(time,enter1.replace(",", ""))) {
+            		isValid = true;
+            		response = hm.get(enter1) + "(4x)";
+            	}else {
+            		isValid = false;
+            		response = "You should order multiple coffe only on morning and multiple potato only on night";
+            	}
+            	
         	}else if(enter1.replace(",", "").equals(enter4.replace(",", "")) && enter2.replace(",", "").equals(enter4.replace(",", ""))) {
-            	response = hm.get(enter1) + "(3x)" + "," + hm.get(enter3);
+            	
+            	if(checkMultipleOrders(time,enter1.replace(",", ""))) {
+            		isValid = true;
+            		response = hm.get(enter1) + "(3x)" + "," + hm.get(enter3);
+            	}else {
+            		isValid = false;
+            		response = "You should order multiple coffe only on morning and multiple potato only on night";
+            	}
+            	
             }else if(enter1.replace(",", "").equals(enter4.replace(",", "")) && enter3.replace(",", "").equals(enter4.replace(",", ""))) {
-            	response = hm.get(enter1) + "(3x)" + "," + hm.get(enter2);
+            	
+            	if(checkMultipleOrders(time,enter1.replace(",", ""))) {
+            		isValid = true;
+            		response = hm.get(enter1) + "(3x)" + "," + hm.get(enter2);
+            	}else {
+            		isValid = false;
+            		response = "You should order multiple coffe only on morning and multiple potato only on night";
+            	}
+            	
             }else if(enter2.replace(",", "").equals(enter4.replace(",", "")) && enter3.replace(",", "").equals(enter4.replace(",", ""))) {
-            	response = hm.get(enter1) + "," + hm.get(enter2)+ "(3x)" ;
+            	
+            	if(checkMultipleOrders(time,enter2.replace(",", ""))) {
+            		isValid = true;
+            		response = hm.get(enter1) + "," + hm.get(enter2)+ "(3x)" ;
+            	}else {
+            		isValid = false;
+            		response = "You should order multiple coffe only on morning and multiple potato only on night";
+            	}
+            	
             }else if(enter1.replace(",", "").equals(enter4.replace(",", ""))) {
-            	response = hm.get(enter1)+"(2x)"+"," + hm.get(enter2) + "," + hm.get(enter3);          	  	
+            	 
+            	if(checkMultipleOrders(time,enter1.replace(",", ""))) {
+            		isValid = true;
+            		response = hm.get(enter1)+"(2x)"+"," + hm.get(enter2) + "," + hm.get(enter3); 
+            	}else {
+            		isValid = false;
+            		response = "You should order multiple coffe only on morning and multiple potato only on night";
+            	}
+            	
             }else if(enter2.replace(",", "").equals(enter4.replace(",", ""))) {
-            	response = hm.get(enter1)+"," + hm.get(enter2)+"(2x)" + "," + hm.get(enter3);         	  	
+            	
+            	if(checkMultipleOrders(time,enter2.replace(",", ""))) {
+            		isValid = true;
+            		response = hm.get(enter1)+"," + hm.get(enter2)+"(2x)" + "," + hm.get(enter3); 
+            	}else {
+            		isValid = false;
+            		response = "You should order multiple coffe only on morning and multiple potato only on night";
+            	}
+            	
             }else if(enter3.replace(",", "").equals(enter4.replace(",", ""))) {
-            	response = hm.get(enter1)+"," + hm.get(enter2) + "," + hm.get(enter3)+"(2x)";         	  	
-            }else {
-            	response = response + "," + hm.get(enter4);
+            	 
+            	if(checkMultipleOrders(time,enter3.replace(",", ""))) {
+            		isValid = true;
+            		response = hm.get(enter1)+"," + hm.get(enter2) + "," + hm.get(enter3)+"(2x)"; 
+            	}else {
+            		isValid = false;
+            		response = "You should order multiple coffe only on morning and multiple potato only on night";
+            	}
+            	
+            }else {                   
+            	if(isValid) {
+            		response = response + "," + hm.get(enter4);
+            	}else {
+            		response = hm.get(enter1) + "," + hm.get(enter2)+ "," + hm.get(enter3)+ "," + hm.get(enter4);
+            	}                    	
+            	
             }
         		
         }
